@@ -1,23 +1,30 @@
-let express = require('express');
-let path = require('path');
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
 
-let indexRouter = require('./routes/index');
-let logger = require('./middleware').logger
+const indexRouter = require('./routes/index');
+const jsonRouter = require('./routes/json')
+const logger = require('./middleware').logger
 
 
 let port = process.env.APP_PORT ?? 3000;
-let app = express();
+const app = express();
 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'templates'));
 app.set('view engine', 'ejs');
 
-
+// static connecting
 app.use(express.static(path.join(__dirname, 'static')));
 
+
+
+app.use(logger);
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.json());
 app.use('/', indexRouter);
-app.use(logger)
+app.use('/api', jsonRouter);
 
 
 // error handler
@@ -30,6 +37,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   console.log(err.stack);
 });
+
 
 app.listen(port, function() {
   console.log(`Server started at http://localhost:${port}`)
