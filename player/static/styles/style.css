@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  padding: 20px;
+  height: calc(100vh - 40px);
+  
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgb(29, 29, 29);
+}
+
+a {
+  color: #00B7FF;
+}
+
+hr {
+  height: 10px;
+  opacity: 0;
+  margin: 0;
+}
+
+
+
+.content-container {
+  display: flex;
+  justify-content: center;
+
+  height: calc(60% - 5px);
+}
+
+.video-container {
+  width: 700px;
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+
+  border-radius: 12px;
+}
+
+.video-container video {
+  height: 100%;
+  width: 100%;
+
+  border-radius: 12px;
+}
+
+
+
+.drop-panel {
+  width: 100%;
+  height: calc(40% - 5px);
+
+  background-color: rgba(255, 255, 255);
+  filter: blur(40%);
+  opacity: 0.5;
+  border-radius: 12px;
+}
+
+.drop-item {
+  width: 100px;
+  height: 100px;
+
+  -webkit-user-drag: element;
+  cursor: move;
+
+  border-radius: 12px;
+  background-color: transparent;
+}
+
+.drop-item div {
+  width: 90px;
+  height: 90px;
+
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+
+  border-radius: 7px;
+  background-color: lightgray;
+}
+
+.drop-item img {
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+
+  margin: 5px;
+}
