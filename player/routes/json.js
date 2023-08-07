@@ -2,27 +2,27 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
-const saveFile = require('./../services/utils');
+const saveFile = require('./../services/utils')['saveFile'];
 
 // load file
 router.post('/', function(req, res, next) {
-  const { file, fileName } = req.body();
-
+  
   // check that file was provided
-  if (!file | !fileName) {
-    res.sendStatus('400');
-    res.end()
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send('No files were uploaded.');
   }
 
-  const binaryData = Buffer.from(file, 'base64');
+  if ( Object.keys(req.files).length === 0) {
+    return res.status(400).send('More than one file were uploaded.');
+  }
 
-  saveFile(fileName, binaryData);
-  res.redirect('/')
+  let file = req.files.file;
+  saveFile(file.name, file.data);
   next();
 });
 
 // delete file
-router.delete('/', function(req, res, next) {
+router.delete('/', function(req, res, next) { 
   next();
 });
 

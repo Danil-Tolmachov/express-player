@@ -1,7 +1,7 @@
-const { error } = require('console');
+const path = require('path');
 const fs = require('fs');
 
-const videoPath = path(path.join(__dirname, 'videos'));
+const videoPath = path.join(path.join(__dirname, '..'), 'videos');
 
 
 function generateFileName(videoName) {
@@ -9,7 +9,7 @@ function generateFileName(videoName) {
 }
 
 function saveFile(fileName, binaryData) {
-    fs.writeFile(path.join(videoPath, generateFileName(fileName), binaryData, handler));
+    fs.writeFile(path.join(videoPath, generateFileName(fileName)), binaryData, handler);
 
     function handler(err) {
         if (err) {

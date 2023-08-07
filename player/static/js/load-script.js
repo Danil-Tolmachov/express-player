@@ -9,11 +9,26 @@ function loadDragoverHandler(e) {
 function loadDropHandler(e) {
   e.preventDefault();
   if(e.dataTransfer.items[0].kind !== 'file') {
-    alert('This zone is used to upload files, not already uploaded!');
+    alert('This zone is used to upload new files!');
     return;
   }
-  let src = e.dataTransfer.getData('src');
-  this.setAttribute('src', src);
+
+  let file = e.dataTransfer.items[0].getAsFile()
+
+  let formData = new FormData();
+
+  formData.append('file', file);
+  formData.append('fileName', file.name);
+
+  $.ajax({
+    url: '/api',
+    contentType: 'multipart/form-data',
+    method: 'POST',
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+  });
 }
 
 

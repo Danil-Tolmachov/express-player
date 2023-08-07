@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 const path = require('path');
 
 const indexRouter = require('./routes/index');
-const jsonRouter = require('./routes/json')
-const logger = require('./middleware').logger
+const jsonRouter = require('./routes/json');
+const logger = require('./middleware').logger;
 
 
 let port = process.env.APP_PORT ?? 3000;
@@ -19,9 +20,10 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'static')));
 
 
-
+app.use(fileUpload());
 app.use(logger);
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.json());
 app.use('/', indexRouter);
 app.use('/api', jsonRouter);
