@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+
 body {
   margin: 0;
   padding: 20px;
@@ -21,13 +23,47 @@ hr {
 
 .content-container {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: start;
+  align-items: center;
 
   height: calc(60% - 5px);
 }
 
+.load-zone {
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+
+  border: solid rgb(76 76 76);
+  border-width: 8px;
+  border-radius: 24px;
+
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.load-zone p {
+  width: fit-content;
+  margin: auto;
+  padding: 10px;
+
+  font-size: 32px;
+  font-family: 'Rubik', sans-serif;;
+  font-weight: 500;
+
+  color: rgb(76 76 76);
+
+  border: dotted rgb(76 76 76);
+  border-radius: 5px;
+}
+
 .video-container {
-  width: 700px;
+  min-width: 50%;
+  max-width: 80%;
   height: 100%;
   background-color: rgb(0, 0, 0);
 
