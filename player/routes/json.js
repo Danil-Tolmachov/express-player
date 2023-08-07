@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path');
 
 const saveFile = require('./../services/utils')['saveFile'];
+const getVideosSrc = require('./../services/utils')['getVideosSrc'];
 
 // load file
 router.post('/', function(req, res, next) {
@@ -17,7 +18,12 @@ router.post('/', function(req, res, next) {
   }
 
   let file = req.files.file;
-  saveFile(file.name, file.data);
+
+  // check save operation status
+  if (!saveFile(file.name, file.data)) {
+    return res.status(403).send('Bad file extension');
+  }
+
   next();
 });
 
@@ -25,5 +31,11 @@ router.post('/', function(req, res, next) {
 router.delete('/', function(req, res, next) { 
   next();
 });
+
+// get loaded videos
+router.get('/video', function(req, res, next) {
+  res.json(getVideosSrc())
+  next()
+})
 
 module.exports = router;
