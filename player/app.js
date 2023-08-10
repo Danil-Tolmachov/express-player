@@ -16,8 +16,10 @@ const app = express();
 app.set('views', path.join(__dirname, 'templates'));
 app.set('view engine', 'ejs');
 
-// static connecting
+// static connect
 app.use(express.static(path.join(__dirname, 'static')));
+// videos path connect
+app.use('/videos', express.static(path.join(__dirname, 'videos')));
 
 
 app.use(fileUpload());
