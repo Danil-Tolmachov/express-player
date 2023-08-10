@@ -4,7 +4,7 @@ const fileUpload = require('express-fileupload');
 const path = require('path');
 
 const indexRouter = require('./routes/index');
-const jsonRouter = require('./routes/json');
+const apiRouter = require('./routes/api');
 const logger = require('./middleware').logger;
 
 
@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.json());
 app.use('/', indexRouter);
-app.use('/api', jsonRouter);
+app.use('/api', apiRouter);
 
 
 // error handler

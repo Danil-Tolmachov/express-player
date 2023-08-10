@@ -1,6 +1,7 @@
 let items = document.querySelectorAll('.drop-item');
 let player = document.querySelector('#player');
 
+
 function panelDragStart(e) {
   this.style.opacity = '0.4';
   e.dataTransfer.setData('src', this.getAttribute('src'))
