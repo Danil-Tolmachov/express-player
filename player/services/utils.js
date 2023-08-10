@@ -1,7 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 
-const videoPath = path.join(path.join(__dirname, '..'), 'videos');
+const BASEDIR = path.join(__dirname, '..');
+const videoPath = path.join(BASEDIR, 'videos');
 const availableFormats = [
   'mp4', 'webm', 'mkv', 'avi'
 ];
@@ -37,7 +38,7 @@ function getVideosSrc() {
   files.forEach(file => {
     result[++increment] = {
       name: file.split('_').slice(1).join('_'),
-      src: path.join(videoPath, file),
+      src: path.join(videoPath.replace(BASEDIR, ''), file),
     };
   });
 

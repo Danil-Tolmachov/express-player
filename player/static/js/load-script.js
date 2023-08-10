@@ -1,37 +1,45 @@
-let loadZone = document.querySelector('#load-panel');
 
-
-function loadDragoverHandler(e) {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = "copy";
-}
-
-function loadDropHandler(e) {
-  e.preventDefault();
-  if(e.dataTransfer.items[0].kind !== 'file') {
-    alert('This zone is used to upload new files!');
-    return;
-  }
-
-  let file = e.dataTransfer.items[0].getAsFile()
-
-  let formData = new FormData();
-
-  formData.append('file', file);
-  formData.append('fileName', file.name);
-
+document.addEventListener('DOMContentLoaded', () => {
   $.ajax({
-    url: '/api',
-    contentType: 'multipart/form-data',
-    method: 'POST',
-    data: formData,
-    cache: false,
-    contentType: false,
-    processData: false,
+    url: '/api/video',
+    method: 'get',
+    success: successGet,
   });
+
+  function successGet(data) {
+    let panel = document.querySelector('#panel');
+
+    for (let [key, value] of Object.entries(data)) {
+      let element = document.createElement('div');
+
+      let innerText = document.createElement('p');
+      innerText.textContent = value.name;
+
+      element.setAttribute('class', "drag-item");
+      element.setAttribute('src', value.src);
+      element.draggable = "true";
+
+      element.appendChild(innerText);
+      panel.appendChild(element);
+    }
+
+    let items = document.querySelectorAll('.drag-item');
+
+    items.forEach((item) => {
+      
+      item.addEventListener("dragstart", itemDragStart);
+      item.addEventListener('dragend', itemDragEnd);
+      
+    });
+  }
+});
+
+function itemDragStart(e) {
+  this.style.opacity = '0.4'
+  e.dataTransfer.setData('src', this.getAttribute('src'))
 }
 
 
-loadZone.addEventListener('dragover', loadDragoverHandler);
-loadZone.addEventListener('drop', loadDropHandler);
-
+function itemDragEnd(e) {
+  this.style.opacity = '1';
+}

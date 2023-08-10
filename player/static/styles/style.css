@@ -79,9 +79,13 @@ hr {
 
 
 
-.drop-panel {
+.drag-panel {
   width: 100%;
   height: calc(40% - 5px);
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 
   background-color: rgba(255, 255, 255);
   filter: blur(40%);
@@ -89,18 +93,36 @@ hr {
   border-radius: 12px;
 }
 
-.drop-item {
+.drag-item {
   width: 100px;
   height: 100px;
 
-  -webkit-user-drag: element;
-  cursor: move;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 
   border-radius: 12px;
+  transition: 0.2s;
   background-color: transparent;
+  cursor: move;
+
+  color: grey;
+  font-family: 'Rubik', sans-serif;;
 }
 
-.drop-item div {
+.drag-item p {
+  padding: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drag-item:hover {
+  background-color: lightgray;
+}
+
+/*
+.drag-item div {
   width: 90px;
   height: 90px;
 
@@ -112,9 +134,10 @@ hr {
   background-color: lightgray;
 }
 
-.drop-item img {
+.drag-item img {
   width: calc(100% - 10px);
   height: calc(100% - 10px);
 
   margin: 5px;
 }
+*/
