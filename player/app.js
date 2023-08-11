@@ -16,6 +16,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'templates'));
 app.set('view engine', 'ejs');
 
+
 // static connect
 app.use(express.static(path.join(__dirname, 'static')));
 // videos path connect
@@ -45,4 +46,4 @@ app.use(function(err, req, res, next) {
 
 app.listen(port, function() {
   console.log(`Server started at http://localhost:${port}`)
-})
+});

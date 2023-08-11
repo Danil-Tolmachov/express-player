@@ -34,8 +34,8 @@ router.delete('/', function(req, res, next) {
 
 // get loaded videos
 router.get('/video', function(req, res, next) {
-  res.json(getVideosSrc())
-  next()
+  res.json(getVideosSrc());
+  next();
 })
 
 module.exports = router;
